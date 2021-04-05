@@ -1,0 +1,170 @@
+\documentclass{beamer}
+
+\input{packages.tex}
+
+\title{OOP-Vererbung, Polymorphie (Vielgestaltigkeit)}
+\author{Paul Raffer}
+\date{}
+
+%\setbeamertemplate{footline}{goo \insertframenumber}
+
+\begin{document}
+
+	\maketitle
+	
+	\section{Polymorphie}
+	\begin{frame}
+		\frametitle{Polymorphie}
+		\input{./res/polymorphie/unterteilungen.tex}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{Geschichte}
+		\begin{itemize}
+			 \item ...
+		\end{itemize}
+	\end{frame}
+	
+	
+	\subsection{Vererbungspolymorphie}
+	\begin{frame}
+		\frametitle{Vererbungspolymorphie}
+		\begin{itemize}
+			\item Vererbung
+			\begin{itemize}
+				\item virtuelle Funktionen
+				\item abstrakte Klassen
+				\item Mehrfachvererbung
+				\begin{itemize}
+					\item virtuelle Vererbung
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	{\setbeamertemplate{footline}{\vspace*{-8pt}Vollständiges Beispiel: \url{https://godbolt.org/z/heEWxW}}
+	\begin{frame}[fragile]
+		\frametitle{Beispiel: Formen}
+		\includegraphics[width=\textwidth]{./res/polymorphie/universell/vererbung/form/uml.png}
+	\end{frame}
+	
+	{\setbeamertemplate{footline}{\vspace*{-8pt}Vollständiges Beispiel: \url{https://godbolt.org/z/heEWxW}}
+	\begin{frame}[fragile]
+		\frametitle{Beispiel: Formen}
+		\UseRawInputEncoding
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/vererbung/form/src/form.hpp}}
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/vererbung/form/src/rechteck.hpp}}
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/vererbung/form/src/quadrat.hpp}}
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/vererbung/form/src/kreis.hpp}}
+		\inputencoding{utf8}
+		
+	\end{frame}
+	}
+	
+	\begin{frame}
+		\frametitle{Mehrfachvererbung}
+		\begin{itemize}
+			\item Funktionalität von mehreren Klassen kombinieren
+		\end{itemize}
+	\end{frame}
+	
+	{\setbeamertemplate{footline}{\vspace*{-8pt}Vollständiges Beispiel: \url{https://godbolt.org/z/heEWxW}}
+	\begin{frame}[fragile]
+		\frametitle{Virtuelle Vererbung}
+		\includegraphics[height=0.8\textheight]{./res/polymorphie/universell/vererbung/virtuell/uml.png}
+	\end{frame}
+	
+	
+	\subsection{Coercion}
+	\subsubsection{eingebaute Datentypen}
+	{\setbeamertemplate{footline}{\vspace*{-8pt}Vollständiges Beispiel: \url{https://godbolt.org/z/}}
+	\begin{frame}
+		\frametitle{Coercion}
+		\begin{itemize}
+			\item implizite Typumwandlungen
+			\begin{itemize}
+				\UseRawInputEncoding
+				
+				\pause\item eingebaute Datentypen
+					{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/adhoc/coercion/src/eingebauteDatentypen.cpp}}
+				\pause\item eingene Datentypen
+				\begin{itemize}
+					\pause\item Konvertierungskonstruktoren
+						{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/adhoc/coercion/src/konvertierungskonstruktoren.cpp}}
+					\pause\item Konvertierungsoperatoren
+						{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/adhoc/coercion/src/konvertierungsoperatoren.cpp}}
+				\end{itemize}
+				\inputencoding{utf8}
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	}
+	
+	
+	\subsection{parametrische Polymorphie}
+	\begin{frame}
+		\frametitle{parametrische Polymorphie}
+		\begin{itemize}
+			\item Templates/Generics
+			\begin{itemize}
+				\item Funktionstemplates
+				\item Klassentemplates
+				\item Konzepte
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	{\setbeamertemplate{footline}{\vspace*{-8pt}Vollständiges Beispiel: \url{https://godbolt.org/z/}}
+	\begin{frame}
+		\frametitle{Funktionstemplates}
+		\UseRawInputEncoding
+		{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/parametrisch/src/funktionstemplates.cpp}}
+		\inputencoding{utf8}
+	\end{frame}
+	}
+	
+	{\setbeamertemplate{footline}{\vspace*{-8pt}Vollständiges Beispiel: \url{https://godbolt.org/z/}}
+	\begin{frame}
+		\frametitle{Klassentemplates}
+		\UseRawInputEncoding
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/parametrisch/src/klassentemplates/stack/1.hpp}}
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/parametrisch/src/klassentemplates/stack/2.hpp}}
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/parametrisch/src/klassentemplates/stack/3.hpp}}
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/parametrisch/src/klassentemplates/stack/4.hpp}}
+		\inputencoding{utf8}
+	\end{frame}
+	}
+	{\setbeamertemplate{footline}{\vspace*{-8pt}Vollständiges Beispiel: \url{https://godbolt.org/z/}}
+	\begin{frame}
+		\frametitle{Klassentemplates}
+		\UseRawInputEncoding
+		{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/parametrisch/src/klassentemplates/main/1.cpp}}
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/parametrisch/src/klassentemplates/main/2.cpp}}
+		\pause{\tiny\lstinputlisting[language={C++}]{./res/polymorphie/universell/parametrisch/src/klassentemplates/main/3.cpp}}
+		\inputencoding{utf8}
+	\end{frame}
+	}
+	
+	
+	
+	\subsection{Überladung}
+	\begin{frame}
+		\frametitle{Überladung}
+		\begin{itemize}
+			\item Funktionsüberladungen
+			\begin{itemize}
+				\item Operatorüberladungen
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	
+	{\tiny
+	\begin{frame}
+		\frametitle{Quellen}
+		\input{./res/quellen.tex}
+	\end{frame}
+	}
+	
+\end{document}

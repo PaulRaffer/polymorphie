@@ -1,0 +1,121 @@
+\newpage
+\section{Polymorphie}
+	Mithilfe von Polymophie kann man das gleiche Interface für Objekte von verschieden Typen bereitstellen. Polymorphie wird
+	auch Polymorphismus oder Vielgestaltigkeit genannt. Das Gegenteil von Polymorphie ist Monomothie. Die meisten Codebeispiele
+	in diesem Dokument sind in C++ geschrieben, da C++ alle der hier genannten Formen der Polymorphie unterstützt.
+	
+	\subsection{Geschischte}
+	
+	\subsection{Arten der Polymophie}
+		\input{./res/polymorphie/unterteilungen.tex}
+
+		\subsubsection{universelle Polymorphie}
+			Mithilfe universeller Polymorphie kann das gleiche Interface für unendlich viele Typen (auch Solche, die es noch
+			gar nicht gibt, sondern die erst in der Zukunft Programmiert werden) bereitgestellt werden, darum wird sie auch
+			``echte'' Vielgestaltigkeit genannt.
+			
+			\paragraph{Inklusionspolymorphie}
+				
+			
+			\paragraph{Vererbungspolymorphie}
+				In objektorientierten Programmiersprachen wird Inklusionspolymorphie meist durch Vererbung ausgedrückt.
+				Trotzdem sind Inklusionspolymorphie und Vererbungspolymorphie nicht das Selbe, da sich Vererbungspolymorphie
+				nicht an die strengen Regeln der Inklusionspolymorphie halten muss.
+				Viele
+				Klassen sind miteinander verwandt. Diese Beziehungen werden durch Vererbung dargestellt. Vererbungspolymorphie
+				ist der Inklusionspolymorphie ähnlich, jedoch nicht das Selbe!
+				
+				Wenn z.B. Klasse B von Klasse A aberbt, werden alle Eigenschaften und Methoden der Basisklasse A (auch Ober-,
+				Super- oder Elternklasse) in die abgeleitete Klass B (auch Unter-, Sub- oder Kindklasse) übernommen.
+				
+				Vererbung stellt meistens eine ist-ein-Bezierhung da. 
+				Jedoch sollte nicht jede ist-ein-Beziehung durch Vererbung dargestellt werden. (siehe Kreis-Ellipse-Problem)
+				
+				\subparagraph{Schnittstellenvererbung}
+				
+				\subparagraph{Implementierungsvererbung}
+					Bei der Implementierungsvererbung wird im Gegensatz zur Schnittstellenverebung nicht nur das Interface
+					sondern auch die Implementierung der Methoden in die abgeleitete Klasse übernommen. So kann
+					beispielsweise von der Basisklasse ein Standardverhalten vorgeschlagen werden, welches aber wenn dies
+					Notwendig ist, von der abgeleiteten Klasse überschrieben werden kann.
+				
+				\subparagraph{Datenkapselung}
+				sdfsa
+					\input{./res/datenkapselung/zugriffsmodifikatoren.tex}
+					
+					\input{./res/polymorphie/universell/vererbung/datenkapselung.tex}
+					
+					In der Praxis wird meistens öffentliche Vererbung (ist ein) verwendet.
+				
+				\subparagraph{Mehrfachvererbung}
+					Wenn eine Unterklasse von mehr als einer Oberklasse aberbt spricht man von Mehrfachvererbung.
+					Mehrfachinterfacevererbung ist in den meisten fällenproblemlos möglich. Mehrfachimplementierungsvererbung
+					jedoch lassen viele Sprachen nicht zu, da diese oft zu fehleranfälligem und unübersichtlichem Code führt,
+					da sich Implementierungen, welche aus unterschiedlichen Basisklassen vererbt werden, wiedersprechen
+					könnten.
+					
+					\subparagraph{Virtuelle Vererbung}
+						Eines der Probleme zu denen Mehrfachvererbung führen kann ist das Diamond-Problem. Dieses tritt auf,
+						wenn eine abgeleitete Klasse über mehr als einen Pfad von derselben Basisklasse aberbt. In C++ kann
+						das Problem mithilfe von virtueller Vererbung gelöst werden. Hierbei erben alle Klassen, die direkt
+						von der in der Vererbungshierachie höchsten Oberklasse aberben, virtuell von dieser ab und teilen sich
+						somit eine gemeinsame Instanz von dieser Klasse.
+				
+				\subparagraph{Abstrakte Klassen}
+					Abstrakte Klassen sind Klassen, von der keine Objekte erzeugt werden können. Das macht natürlich nur Sinn,
+					wenn von so einer Klasse abgeerbt wird und von einer Unterklasse ein Objekt erzeugt wird.
+				
+				\subparagraph{Entgültige Klassen}
+					Entgültige Klasssen sind Klassen von denen nicht abgeerbt werden kann.
+					
+				\subparagraph{Liskovsches Substitutionsprinzip}
+					Das Liskovsche Substitutionsprinzip ist erfüllt, wenn jedes Objekt einer Oberklasse problemlos durch ein
+					Objekt dessen Unterklasse ersetzt werden kann.
+					
+					\subparagraph{Kreis-Ellipse-Problem}
+						Das Kreis-Ellipse-Problem (bzw. Quadrat-Rechteck-Problem) ist ein Problem in der objektorientierten
+						Programmierung.
+						
+						Lösungsvorschläge:
+						
+						\begin{itemize}
+							\item Fehler bei Größenänderung:
+								Nachteil: Problem muss auf Ebene der Basisklasse gelöst werden
+							\item Ellipse erbt von Kreis ab:
+							
+							\item Keine Klasse Kreis
+							
+							\item Keine Vererbungsbeziehung zwischen Ellipse und Kreis
+								Nachteil: Doppelte Implementierung
+							\item Einführen neuer Basisklasse
+							
+						\end{itemize}
+			
+				
+			\paragraph{Parametrische Polymorphie}
+				\subparagraph{einfachen parametrischen Polymorphismus}
+				
+				\subparagraph{beschränkten parametrischen Polymorphismus}
+					Im Gegensatz zum einfachen parametrischen Polymorphismus ist die beschränkte parametrischen Polymorphismus
+					typensicher.
+					
+			
+		\subsubsection{Ad-hoc-Polymorphie}
+			Mithilfe von Ad-hoc-Polymorphie kann das gleiche Interface im Gegensatz zu universellen Polymorphie nur für eine
+			begrengte Anzahl an bestimmten Typen bereitgestellt werden.
+		
+			\paragraph{Coercion}
+				Coercion ist eine implizite Typumwandlung vom Compiler.
+			
+			\paragraph{Überladung}
+				\subparagraph{Operatorüberladung}
+					Manche Programmiersprachen (darunter C++) ermöglichen das Überladen von Operatoren für eigene Typen. Die
+					Operatorüberladung ist ein Spezialfall der Funktionsüberladung, da Operatoren auch nichts anderes als
+					Funktionen mit einem oder zwei Parametern sind.
+					
+					Es können beispielsweise die Arithmetischen Operatoren für eine eigene Bruchklasse definiert werden.
+					
+\newpage
+\section{Quellen}
+	\input{./res/quellen.tex}
+	

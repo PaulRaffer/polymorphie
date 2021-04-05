@@ -1,0 +1,41 @@
+\usepackage[ngerman]{babel}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{hyperref}
+
+\usepackage{tabularx}
+\usepackage{array}
+\newcolumntype{$}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+	#1\ignorespaces
+}
+\usepackage{multirow}
+
+\usepackage{listings}
+\lstset{
+	tabsize=4,
+	keywordstyle=\color{blue},
+	commentstyle=\color{gray},
+	stringstyle=\color{blue},
+	alsoletter=0123456789,
+}
+
+\newcommand\opstyle{\color{red}} % <--- customise operator style here
+\makeatletter
+\lstset
+{%
+  language=C++,
+  alsoletter=0123456789,% to prevent \opstyle from being applied to digits
+}
+% Hook into listings
+\lst@AddToHook{OutputOther}{\ProcessOther@silmeth}
+% helper macro
+\newcommand\ProcessOther@silmeth
+{%
+  \ifnum\lst@mode=\lst@Pmode%     % If we're in `Processing' mode...
+    \def\lst@thestyle{\opstyle}%  % ... redefine the style locally
+  \fi%
+}
+\makeatother
