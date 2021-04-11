@@ -1,13 +1,13 @@
 \section{Vererbung}
 	Vererbung (englisch inheritance) ist ein Konzept der objektorientierten Programmierung, das meist in Kombination mit
-	Polymorphie eingesetzt wird (siehe 3.2.1.2 Vererbungspolymorphie), aber auch eigenständig sinnvoll verwendet werden kann.
+	Polymorphie eingesetzt wird (siehe 3.1.2 Vererbungspolymorphie), aber auch eigenständig sinnvoll verwendet werden kann.
 	Wenn z.B. Klasse B von Klasse A erbt, werden alle Eigenschaften und Methoden der Basisklasse A (auch Ober-, Super- oder
 	Elternklasse) in die abgeleitete Klasse B (auch Unter-, Sub- oder Kindklasse) übernommen. Dies hat den Vorteil, dass
 	Eigenschaften und Methoden aus einer bestehenden Basisklasse wiederverwendet werden können, und somit doppelter Code und
 	Schreibarbeit vermieden werden. In UML (Unified Modeling Language) wird Vererbung durch einen Pfeil von einer abgeleiteten
 	Klasse zu dessen Basisklasse dargestellt.
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\includegraphics[scale=0.75]{vererbung/uml.png}
 	\end{figure}
 	
@@ -24,7 +24,7 @@
 			Bei der öffentlichen Vererbung bleiben geschützte Eigenschafen und Methoden der Basisklasse auch in der
 			abgeleiteten Klasse geschützt. Öffentliche Eigenschafen und Methoden bleiben öffentlich. Öffentliche Vererbung
 			sollte immer eine ``ist-ein''-Beziehung darstellen. Jedoch sollte nicht jede ``ist-ein''-Beziehung durch Vererbung
-			dargestellt werden. (siehe ?.?... Kreis-Ellipse-Problem) Diese Art der Vererbung wir am häufigsten verwendet.
+			dargestellt werden (siehe 3.1.2.2 Kreis-Ellipse-Problem). Diese Art der Vererbung wir am häufigsten verwendet.
 			
 			Bei der geschützten Vererbung sind alle öffenlichen und geschützten Eigenschafen und Methoden der Basisklasse in
 			der abgeleiteten Klasse geschützt. Geschützte Vererbung sollte immer eine ``ist implementiert mit''-Beziehung darstellen
@@ -38,31 +38,34 @@
 			
 			Private Eingenschafen und Methoden der Basisklasse werden nicht in die abgeleitete Klasse vererbt.
 			
-			{\bfseries Beispiel:}
-		
-			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point2d.hpp}}\inputencoding{utf8}
-			Eine C++ Klasse Point2d, deren Objekte Punkte auf einer Ebene darstellen, existiert bereits. Nun sollen auch Punkte im Raum
-			erstellt werden können. Dafür wird die Klasse Point3d geschrieben, welche unterschiedlich programmiert werden kann.
+			\paragraph*{Beispiel:}
+				Eine C++ Klasse Point2d, deren Objekte Punkte auf einer Ebene darstellen, existiert bereits.
+				\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point2d.hpp}}\inputencoding{utf8}
+				Nun sollen auch Punkte im Raum erstellt werden können. Dafür wird die Klasse Point3d geschrieben, welche
+				unterschiedlich programmiert werden kann.
 			
-			{\bfseries Lösung ohne Vererbung:}
+			\subparagraph*{Lösung ohne Vererbung:}
+			Natürlich könnte die Klasse von Grund auf neu geschrieben werden.
 			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.no.hpp}}\inputencoding{utf8}
 			Diese Lösung ist nicht optimal, da die Eingenschaften x und y aus der Klasse Point2d nicht wiederverwendet werden.
 			
-			{\bfseries Lösung mit öffentlicher Vererbung:}
+			\subparagraph*{Lösung mit öffentlicher Vererbung:}
+			Mit öffentlicher Vererbung können die Eigenschaften 'x' und 'y' aus der Klasse 'Point2d' für die Klasse 'Point3d'
+			wiederverwendet werden.
 			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.public.hpp}}\inputencoding{utf8}
-			Obwohl hier öffenliche Vererbung verwendet wurde, ist es wahrscheinlich nicht sinnvoll diese Klassen vielgestaltig zu verwenden, da die
-			Aussage ``Ein Punkt im Raum (Point3d) ist ein Punkt auf einer Ebene (Point2d).'' nicht stimmt.
+			Obwohl hier öffenliche Vererbung verwendet wurde, ist es wahrscheinlich nicht sinnvoll diese Klassen vielgestaltig
+			zu verwenden, da die Aussage ``Ein Punkt im Raum (Point3d) ist ein Punkt auf einer Ebene (Point2d).'' nicht stimmt.
 			
 			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point.use.cpp}}\inputencoding{utf8}
 			Diese Zeile würde zwar vom Compiler übersetzt werden, macht aber wenig Sinn. Leider gibt es keine Möglichkeit eine
 			solche Verwendung zu verhindern. Deshalb ist auch die Lösung mit öffentlicher Vererbung nicht optimal.
 			
-			{\bfseries Lösung mit privater Vererbung:}
+			\subparagraph*{Lösung mit privater Vererbung:}
 			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.private.hpp}}\inputencoding{utf8}
 			Wenn man von der Klasse 'Point2d' privat erbt, hat man keines der Probleme der anderen beiden Lösungen,
-			allerdings muss man die Eigenschaften x und y in der abgeleiteten Klasse wieder öffentlich machen, da diese bei
+			allerdings muss man die Eigenschaften 'x' und 'y' in der abgeleiteten Klasse wieder öffentlich machen, da diese bei
 			der privaten Vererbung privat werden. In diesem Fall hat diese Lösung keinen Vorteil im Vergleich zur ersten, da
-			der Code sogar länger ist. Wenn aber x und y Methoden statt Eigenschaften sind, lohnt es sich sehr wohl private
+			der Code sogar länger ist. Wenn aber 'x' und 'y' Methoden statt Eigenschaften sind, lohnt es sich sehr wohl private
 			Vererbung zu verwenden, da diese dann nicht doppelt implementiert werden müssen.
 			
 	
@@ -71,7 +74,7 @@
 		Basisklasse	in die abgeleitete Klasse übernommen. Deshalb MÜSSEN alle Methoden, die mittels Schnittstellenvererbung
 		vererbt werden, in der abgeleiteten Klasse implementiert werden. In Java ist das Typensystem zweigeteilt, in normale
 		Klassen und Interfaces, die von Klassen implementiert werden können. In C++ können Interfaces mit abstrakten Klassen,
-		die nur öffentliche virtuelle Methoden enthalten, nachgebildet werden.
+		die nur rein virtuelle Methoden enthalten, nachgebildet werden.
 		
 	\subsection{Implementierungsvererbung}
 		Bei der Implementierungsvererbung wird im Gegensatz zur Schnittstellenvererbung nicht nur die Signatur, sondern auch
@@ -106,13 +109,12 @@
 					\includegraphics[scale=0.75]{vererbung/mehrfach/diamond/virtuell.png}
 				\end{figure}
 				
-				{\bfseries Beispiel:}
+				\subparagraph*{Beispiel:}
 					Es könnte z.B. eine Klasse 'Person' geben, von der die Klassen 'Schueler' und 'Lehrer' erben. Die Klasse
 					'Lehrer' fügt die Methode 'unterrichten' hinzu und die Klasse 'Schueler' die Methode 'lernen'. Es gibt aber
-					auch Schüler, die anderen Schülern Nachhilfe geben. Solche Schüler sind also Schüler und Lehrer
-					gleichzeitig. Deshalb wird eine neue Klasse 'Schueler\_und\_Lehrer' programmiert, die von der Klasse
-					'Schueler' und von der Klasse 'Lehrer' erbt. Objekte dieser Klasse können sowohl unterrichten, als auch
-					lernen.
+					auch Schüler, die anderen Schülern Nachhilfe geben. Solche Schüler sind also Schüler und Lehrer zugleich.
+					Deshalb wird eine neue Klasse 'Schueler\_und\_Lehrer' programmiert, die von der Klasse 'Schueler' und von
+					der Klasse 'Lehrer' erbt. Objekte dieser Klasse können sowohl unterrichten, als auch lernen.
 					\begin{figure}[H]
 						\includegraphics[scale=0.75]{vererbung/mehrfach/diamond/beispiele/schueler_lehrer/schueler_lehrer.png}
 					\end{figure}
@@ -122,7 +124,7 @@
 			
 	\subsection{Abstrakte Klassen}
 		Eine abstrakte Klasse ist eine Klasse, von der keine Objekte erzeugt werden können. Das ist natürlich nur Sinnvoll,
-		wenn von so einer Klasse geerbt wird, damit von der Unterklasse ein Objekt erzeugt werden kann. In Java werden
+		wenn von so einer Klasse geerbt wird, damit von einer Unterklasse ein Objekt erzeugt werden kann. In Java werden
 		abstrakte Klassen mit dem abstract-Schlüsselwort gekennzeichnet. In C++ ist eine Klasse, die eine rein virtuelle
 		Methode (virtual method() = 0) enthält, automatisch abstrakt.
 		
@@ -141,5 +143,5 @@
 			\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt_child.use.cpp}}\inputencoding{utf8}
 	
 	\subsection{Endgültige Klassen}
-		Endgültige Klassen sind Klassen von denen nicht geerbt werden kann.
+		Endgültige Klassen sind Klassen, von denen nicht geerbt werden kann.
 		\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/endgueltig/endgueltig.hpp}}\inputencoding{utf8}
