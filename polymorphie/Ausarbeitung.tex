@@ -1,0 +1,210 @@
+\section{Polymorphie}
+	Mithilfe von Polymorphie kann man das gleiche Interface für Objekte von verschieden Typen bereitstellen. Polymorphie wird
+	auch Polymorphismus oder Vielgestaltigkeit genannt. Das Gegenteil von Polymorphie ist Monomorphie. Die meisten Codebeispiele
+	in diesem Kapitel sind in C++ geschrieben, da C++ alle der hier genannten Formen der Polymorphie unterstützt.
+	
+	Es gibt unterschiedliche Arten der Polymorphie, die man unterschiedlich einteilen kann. Eine mögliche Einteilung könnte
+	beispielsweise so aussehen:
+	
+	\input{polymorphie/unterteilungen.tex}
+	
+	Polymorphie kann in statische und dynamische Polymorphie eingeteilt werden. Bei der statischen Polymorphie steht schon
+	zur Kompilezeit fest, welche Funktion bzw. Methode zur Laufzeit aufgerufen werden wird. Bei der dynamischen hingegen
+	wird dies erst zu Laufzeit entschieden. Welche Methode aufgerufen wird, ist abhängig vom Typen des Objekts.
+	Diese Einteilung stimmt für die meisten Programmiersprachen, es gibt aber auch Ausnahmen. In dynamischen
+	Programmiersprachen müssen beispielsweise alle Arten der Polymorphie dynamisch sein, da das Programm nicht kompiliert
+	wird.
+	Weiters kann auch zwischen universeller- und Ad-hoc-Polymorphie unterschieden werden.
+
+	\subsection{universelle Polymorphie}
+		Mithilfe universeller Polymorphie kann das gleiche Interface für unendlich viele Typen mit nur einer einzigen Implementierung bereitgestellt werden. Diese
+		Typen muss es noch gar nicht geben, sondern können auch erst in der Zukunft definiert werden. Darum wird
+		universelle Polymorphie auch oft ``echte'' Vielgestaltigkeit genannt.
+		
+		\subsubsection{Inklusionspolymorphie}
+			Inklusionspolymorphie (englisch subtyping) liegt dann vor, wenn das Liskovsche Substitutionsprinzip erfüllt ist.
+			
+			\paragraph{Liskovsches Substitutionsprinzip}
+				Das Liskovsche Substitutionsprinzip ist erfüllt, wenn jedes Objekt eines Typen A (bei Vererbung die
+				Basisklasse) problemlos durch ein Objekt des Typen B (bei Vererbung die abgeleitete Klasse) ersetzt werden
+				kann, ohne dass sich dabei das Verhalten ändert. Ein Objekt des Typen B muss jedoch nicht durch ein Objekt
+				des Typen A ersetzt werden können. Das bedeutet, dass die Schnittstelle das Typen A eine Teilmenge der
+				Schnittstelle des Typen B sein muss.
+		
+		\subsubsection{Vererbungspolymorphie}
+			In objektorientierten Programmiersprachen wird Inklusionspolymorphie meist durch Vererbung ausgedrückt.
+			Trotzdem sind Inklusionspolymorphie und Vererbungspolymorphie (englisch subclassing) nicht dasselbe, da sich
+			die Vererbungspolymorphie nicht an das Liskovsche Substitutionsprinzip der halten muss. Es kann beispielsweise
+			eine Methode, welche in einer in einer Basisklasse existiert, in der abgeleiteten Klasse entfernt werden. Es
+			sollte aber auch bei Vererbungspolymorphie darauf geachtet werden, dass das Liskovsche Substitutionsprinzip
+			eingehalten wird, auch wenn dies nicht erforderlich ist.
+			
+			\paragraph{Virtuelle Methoden}
+				Eine virtuelle Methode, ist eine Methode bei der zur Kompilezit noch nicht feststeht, welcher Code ausgeführt
+				wird, wenn sie aufgerufen wird.
+			
+			\paragraph*{Beiepiel1:}\mbox{}
+			
+				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/universell/vererbung/beispiele/fahrzeug/fahrzeug.good.cpp}}\inputencoding{utf8}
+				Eine Alternative zu Vererbungspolymorphie wäre mehrfache Auswahl (z.B. mit dem switch-Statement). Nachteil dabei
+				ist, das der Code für ein Objekt nicht gesammelt an einem Platz ist, sondern über das ganze Programm verteilt.
+				So müsste man immer den ganzen Code durchsuchen, wenn man z.B. einen Fahrzeugtypen hinzufügen möchte. Wenn man
+				allerdings Vererbungspolymorphie verwendet, muss man lediglich eine weiter Unterklasse schreiben.
+				
+				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/universell/vererbung/beispiele/fahrzeug/fahrzeug.bad.cpp}}\inputencoding{utf8}
+				
+			
+			\paragraph*{Beispiel2:}\mbox{}
+			
+					\begin{figure}[H]
+						\includegraphics[width=\textwidth]{polymorphie/universell/vererbung/beispiele/snake/snake.png}
+					\end{figure}
+					
+					Als ich in der 1. Klasse mein Multiplayer-Snake-Spiel mit ein paar Sonderregeln programmierte, kannte
+					ich Klassen noch nicht. Man kann in dem Spiel unterschiedliche Arten von Gebäuden bauen (Kanonen, Mauern, Geldlager,
+					Krankenhäuser, ...) und unterschiedliche Arten von Punkten fressen (normale Punkte, Geld, Leben, ...).
+					Dies wäre der Ideale Anwendungsfall für Vererbungspolymorphie gewesen. Da ich diese aber noch nicht
+					kannte musste ich mit mehrfacher Auswahl bzw. doppeltem Code arbeiten. Dies führte zu sehr unübersichtlichem, redundanten
+					und schwer erweiterbarem Code. Jedes Mal, wenn man einen Gebäudetyp hinzufügen möchte, muss man den Code
+					an unterschiedlichen Stellen im gesamten File bearbeiten.
+					
+					Viel Code wurde doppelt für unterschiedliche Gebäude geschrieben:
+					
+					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/universell/vererbung/beispiele/snake/snake_gebaeude.bad.cpp}}\inputencoding{utf8}
+					
+					Codeteile wie diese findet man über den gesamten Code verteilt. Abgesehen davon, dass diese
+					Funktionsnamen nicht sehr aussagekräftig sind, wird das Programm durch den doppelten Code
+					auch länger als notwendig. Das gesamte Programm ist 1900 Zeilen lang. Wenn man es mit
+					Vererbungspolymorphie neu programmieren würde, könnte man sich mindestens die Hälfte des Codes sparen.
+					Ein weiteres Problem ist, dass leicht auf ein Gebäude vergessen werden kann. Die führt zu mehr Fehlern,
+					die im schlimmsten Fall gar nicht auffallen, sondern sich erst später bemerkbar machen.
+					
+					Mit Vererbungspolymorphie könnte eine Vererbungshierarchie beispielsweise so aussehen:
+					\begin{figure}[H]
+						\includegraphics[width=\textwidth]{polymorphie/universell/vererbung/beispiele/snake/gebaeude.png}
+					\end{figure}
+					
+					Die Funktionsaufrufe würden sich dadurch vereinfachen, da zur Laufzeit automatisch die richtige virtuelle
+					Methode, abhängig vom Gebäudetyp, ausgewählt wird.
+					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/universell/vererbung/beispiele/snake/snake_gebaeude.good.cpp}}\inputencoding{utf8}
+					
+					Der Vollständige Code ist auf GitHub zu finden: \url{https://github.com/PaulRaffer/Snake}
+				
+			\paragraph{Kreis-Ellipse-Problem}
+				Das Kreis-Ellipse-Problem (bzw. Quadrat-Rechteck-Problem) ist ein Problem in der objektorientierten
+				Programmierung.
+				
+				{\bfseries Problem:}
+					Für eine Grafiksoftware existiert bereits die (abstrakte) Basisklasse 'Form', welche die Methoden
+					'zeichnen' und 'flaeche' enthält. Einige konkrete Klassen, wie z.B. Dreieck, haben bereits von 'Form'
+					geerbt. Nun sollen auch Klassen für Ellipsen und Kreise geschrieben werden, doch das ist komplizierter
+					als es auf den ersten Blick aussieht.
+					
+					Die intuitive Lösung wäre, dass die Klasse 'Kreis' von der Klasse 'Ellipse' erbt, welche wiederum von
+					der Klasse 'Form' erbt, da jeder Kreis auch eine Ellipse ist und somit eine ``ist-ein''-Beziehung
+					vorliegt. Zusätzlich zu den beiden Methoden 'zeichnen' und 'flaeche' implementiert die Klasse 'Ellipse'
+					auch noch die Setter 'set\_x' und 'set\_y' zum skalieren der Ellipse. Diese beiden Methoden werden auch
+					an die Klasse 'Kreis' weitergegeben, obwohl man bei einem Kreis nicht beide Dimensionen unabhängig
+					voneinander skalieren kann. Wenn ein skalieren der einen Dimension ein automatisches skalieren der anderen
+					Dimension bewirkt, ist das Liskovsches Substitutionsprinzip nicht erfüllt!
+				
+				{\bfseries Lösungsvorschläge:}
+				
+					\begin{itemize}
+						
+						
+						\item Fehler bei Größenänderung:
+							Bereits die Basisklasse 'Ellipse' legt fest, dass die Methoden zum ändern der Größe scheitern
+							können. Dies wird z.B. durch das zurückgeben eines Fehlercodes signalisiert. Der Nachteil
+							dieser Lösung ist, dass das Problem bereits auf Ebene der Basisklasse gelöst werden muss, und
+							der Entwickler der Basisklasse auch alle abgeleiteten Klassen kennen muss.
+							
+						\item Ellipse erbt von Kreis ab:
+							Bei dieser Lösung enthält die Klasse 'Kreis' einen Setter und die entsprechende Eigenschaft. Die
+							Klasse 'Ellipse' erbt bin der Klasse 'Kreis' und ergänzt den zweiten Setter und die zweite
+							Eigenschaft für die zweite Dimension. Das Problem hierbei ist, dass die Aussage ``Jede Ellipse
+							ist ein Kreis.'' nicht richtig ist, und keine ``ist-ein''-Beziehung darstellt. Es wird das
+							gesamte Interface der Klasse 'Kreis' in die Klasse 'Ellipse' vererbt, auch Eigenschaften und
+							Methoden, die nur ein Kreis haben sollte, wie z.B. 'radius'.
+							
+						\item Keine Klasse Kreis:
+							Eine weitere mögliche Lösung ist, dass es gar keine Klasse gibt, sondern die Klasse Ellipse
+							eine Methode 'ist\_kreis' bereitstellt. Der Nachteil davon ist, dass der Kreis kein eigenes
+							Interface (z.B. 'radius') bereitstellen kann.
+						
+						\item Keine Vererbungsbeziehung zwischen Ellipse und Kreis:
+							Es könnten auch beide Klassen direkt von der gemeinsamen Basisklasse 'Form' erben, was
+							allerdings bedeuten würde, dass die Gemeinsamkeiten der beiden Klassen doppelt implementiert
+							werden müssten.
+							
+						\item Einführen neuer Basisklasse:
+							Man könnte auch eine weitere Klasse einführen, welche in der Vererbungshierarchie zwischen der
+							Basisklasse 'Form' und den beiden konkreten Formen 'Kreis' und 'Ellipse' steht. Der Nachteil
+							davon ist, dass dadurch die Tiefe der Vererbungshierarchie erhöht werden würde, was den Code
+							unflexibler machen würde.
+						
+					\end{itemize}
+					
+					Keiner der oben genannten Lösungsvorschläge ist ideal. Jeder hat seine Vor- und Nachteile.
+					
+					Daraus folgt, das nicht jede ``ist-ein''-Beziehung durch öffentliche Vererbung dargestellt
+					werden sollte, auch wenn öffentliche Vererbung meistens ``ist-ein'' bedeuten sollte.
+			
+		\subsubsection{Parametrische Polymorphie (TODO)}
+			\paragraph{Einfacher parametrischen Polymorphismus}
+			
+			\paragraph{Beschränkter parametrischen Polymorphismus}
+				Im Gegensatz zum einfachen parametrischen Polymorphismus ist der beschränkte parametrische Polymorphismus
+				typensicher.
+				
+			\paragraph{CRTP (Curiously recurring template pattern)}
+				
+				
+		
+	\subsection{Ad-hoc-Polymorphie}
+		Mit Ad-hoc-Polymorphie kann die gleiche Schnittstelle, im Gegensatz zu universellen Polymorphie, nur für eine
+		begrenzte Anzahl an bestimmten Typen bereitgestellt werden. Für jeden Typ gibt es eine eigene Implementierung
+	
+		\subsubsection{Coercion}
+			Coercion ist eine implizite Typumwandlung vom Compiler. Diese Art der Polymorphie ist statisch, da schon zur
+			Kompilezeit feststeht, welche Funktion bzw. Methode aufgerufen wird. Implizite Typumwandlungen können entweder
+			zwischen zwei Variablen von eingebauten Typen, zwischen Objekten von selbst definierten Typen oder zwischen
+			einer Variable eines eingebauten Typen und einem Objekt stattfinden. 
+			
+			\paragraph{Coercion von Variablen eingebauter Typen}\mbox{}
+			
+				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/coercion/beispiele/src/eingebauteDatentypen.cpp}}\inputencoding{utf8}
+				
+				Ohne Coercion würde diese Zeile einen Fehler verursachen! Diese Art der Coercion ist die einzige Art der
+				Polymorphie die von der Programmiersprache C unterstützt wird!
+			
+			\paragraph{Coercion von Objekten}
+				{\bfseries Konvertierungskonstruktor (C++):}
+					In C++ ist ein Konvertierungskonstruktor ein nicht expliziter Konstruktor der einen einzigen Parameter
+					akzeptiert. Solch ein Konstruktor wandelt Objekte bzw. Variablen des Parametertyps in Objekte des
+					Klassentyps um. Der Konstruktor darf nicht explizit sein, da sonst nur explizite Typumwandlungen möglich
+					sind.
+					
+					
+					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/coercion/beispiele/src/konvertierungskonstruktoren.cpp}}\inputencoding{utf8}
+				
+				{\bfseries Konvertierungsoperatoren (C++):}
+					In C++ werden Konvertierungsoperatoren verwendet, um ein Objekt in ein Objekt oder eine Variable eines
+					anderen Typen umzuwandeln.
+					
+					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/coercion/beispiele/src/konvertierungsoperatoren.cpp}}\inputencoding{utf8}
+		
+		\subsubsection{Überladung}
+			Bei der Funktionsüberladung können verschiedene Funktionen gleich heißen und sich nur durch die Typen oder die
+			Anzahl ihrer Parameter unterscheiden. Funktionen, die das gleiche Verhalten haben, sollten auch den gleichen
+			Namen haben.
+			
+			{\bfseries Beispiel:}
+				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/src/reset.cpp}}\inputencoding{utf8}
+		
+			\paragraph{Operatorüberladung}
+				Manche Programmiersprachen (darunter C++) ermöglichen das Überladen von Operatoren für eigene Typen. Die
+				Operatorüberladung ist ein Spezialfall der Funktionsüberladung, da Operatoren auch nichts anderes als
+				Funktionen mit einem oder zwei Parametern sind.
+				
+				Es können beispielsweise die arithmetischen Operatoren für eine eigene Bruchklasse definiert werden.

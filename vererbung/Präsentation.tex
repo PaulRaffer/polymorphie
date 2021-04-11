@@ -1,0 +1,139 @@
+\section{Vererbung}
+
+\begin{frame}
+	\frametitle{Vererbung}
+	\begin{itemize}
+		\item Meist in Kombination mit Polymorphie
+		\item Eigenschaften und Methoden der Basisklasse A werden in abgeleitete Klasse B übernommen
+		\item Doppelter Code und Schreibarbeit werden vermieden
+		\item UML: Pfeil von abgeleiteter Klasse zu Basisklasse
+	\end{itemize}
+	\begin{figure}[h]
+		\includegraphics[scale=0.75]{vererbung/uml.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Datenkapselung im Rahmen der Vererbung}
+	\begin{figure}[h]
+		\input{vererbung/datenkapselung.tex}
+	\end{figure}
+	\begin{itemize}
+		\item öffentlich: ``ist-ein''-Beziehung
+		\item geschützt: ``ist-implementiert-mit''-Beziehung
+		\item privat: ``ist-implemtniert-mit''-Beziehung
+		\item Layering: ``hat-ein''-/''ist-implementiert-mit''-Beziehung
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Beispiel:}
+	{\tiny\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point2d.hpp}}\inputencoding{utf8}}
+	\pause
+	{\bfseries Lösung ohne Vererbung:}
+	{\tiny\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.no.hpp}}\inputencoding{utf8}}
+	\pause
+	{\bfseries Lösung mit öffentlicher Vererbung:}
+	{\tiny\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.public.hpp}}\inputencoding{utf8}}
+	\pause
+	{\tiny\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point.use.cpp}}\inputencoding{utf8}}
+	\pause
+	{\bfseries Lösung mit privater Vererbung:}
+	{\tiny\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.private.hpp}}\inputencoding{utf8}}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Schnittstellenvererbung}
+	\begin{itemize}
+		\item Nur Methodensignatur, aber keine Standardimplementierung, wird vererbt
+		\item Java: Interface
+		\item C++: abstrakte Klasse, die nur rein virtuelle Methoden enthält
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Implementierungsvererbung}
+	\begin{itemize}
+		\item Methodensignatur und Standardimplementierung werden vererbt
+		\item Standardimplementierung kann aber von abgeleiteter Klasse überschrieben werden
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Mehrfachvererbung}
+	\begin{itemize}
+		\item Eine abgeleitet Klasse erbt von mehreren Basisklassen
+		\item Mehrfachinterfacevererbung problemlos möglich
+		\item Mehrfachimplementierungsvererbung führt oft zu fehleranfälligem und unübersichtlichem Code
+	\end{itemize}
+	\begin{figure}[H]
+		\includegraphics[scale=0.75]{vererbung/mehrfach/mehrfach.png}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Diamond-Problem}
+	\begin{itemize}
+		\item Eine abgeleitete Klasse erbt über mehr als einen Pfad von derselben Basisklasse
+		\item Eigenschaften und Methoden werden mehrfach vererbt
+	\end{itemize}
+	\begin{figure}[H]
+		\includegraphics[scale=0.75]{vererbung/mehrfach/diamond/nicht_virtuell.png}
+	\end{figure}
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{C++-Lösung: Virtuelle Vererbung}
+	\begin{itemize}
+		\item B1 und B2 erben von A virtuell
+		\item abgeleitete Klassen teilen sich eine gemeinsame Instanz
+	\end{itemize}
+	\begin{figure}[H]
+		\includegraphics[scale=0.75]{vererbung/mehrfach/diamond/virtuell.png}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Beispiel: Schüler/Lehrer}
+	\begin{itemize}
+		\item Schueler und Lehrer erben von Person
+		\item Es gibt auch Schüler, die anderen Schülern Nachhilfe geben
+	\end{itemize}
+	\begin{figure}[H]
+		\includegraphics[scale=0.5]{vererbung/mehrfach/diamond/beispiele/schueler_lehrer/schueler_lehrer.png}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Abstrakte Klassen}
+	\begin{itemize}
+		\item Von abstrakten Klassen können keine Objekte erzeugt werden
+		\item Es wird von solchen Klassen nur geerbt und von der abgeleiteten Klasse ein Objekt erzeugt.
+	\end{itemize}
+	\pause
+	{\tiny\bfseries Java:}
+		{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt.java}}\inputencoding{utf8}}
+	
+	{\tiny\bfseries C++:}
+		{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt.hpp}}\inputencoding{utf8}}
+		
+		\pause{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt.use.cpp}}\inputencoding{utf8}}
+		
+		\pause{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt_child.use.cpp}}\inputencoding{utf8}}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Entgültige Klassen}
+	\begin{itemize}
+		\item Kann keine Basisklasse sein
+	\end{itemize}
+\end{frame}

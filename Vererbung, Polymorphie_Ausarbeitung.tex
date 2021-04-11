@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\input{packages.tex}
+\usepackage{titling}
+
+\setlength{\parindent}{0cm}
+\setcounter{secnumdepth}{5}
+
+\input{macros.tex}
+
+\makeatletter
+\lhead{FSST}
+\chead{\thetitle}
+\rhead{\thedate}
+\lfoot{Copyright \copyright\ \theauthor\ 2021}
+\cfoot{\thepage\ / \pageref{LastPage}}
+\makeatother
+
+\begin{document}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\input{Ausarbeitung.tex}
+\end{document}
