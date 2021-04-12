@@ -1,7 +1,8 @@
 \section{Polymorphie}
-	Mithilfe von Polymorphie kann man das gleiche Interface für Objekte von verschieden Typen bereitstellen. Polymorphie wird
-	auch Polymorphismus oder Vielgestaltigkeit genannt. Das Gegenteil von Polymorphie ist Monomorphie. Die meisten Codebeispiele
-	in diesem Kapitel sind in C++ geschrieben, da C++ alle der hier genannten Formen der Polymorphie unterstützt.
+	Mithilfe von Polymorphie kann das gleiche Interface für Objekte verschiedener Typen bereitgestellt werden. Ein Bezeichner
+	kann dabei Objekte unterschiedlicher Datentypen annehmen. Polymorphie wird auch Polymorphismus oder Vielgestaltigkeit
+	genannt. Das Gegenteil von Polymorphie ist Monomorphie. Die meisten Codebeispiele in diesem Kapitel sind in C++
+	geschrieben, da C++ alle der hier genannten Formen der Polymorphie unterstützt.
 	
 	Es gibt unterschiedliche Arten der Polymorphie, die man unterschiedlich einteilen kann. Eine mögliche Einteilung könnte
 	beispielsweise so aussehen:
@@ -43,7 +44,7 @@
 				Eine virtuelle Methode, ist eine Methode bei der zur Kompilezit noch nicht feststeht, welcher Code ausgeführt
 				wird, wenn sie aufgerufen wird.
 			
-			\paragraph*{Beiepiel1:}\mbox{}
+			\paragraph*{Beiepiel1 -- Fahrzeuge:}\mbox{}
 			
 				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/universell/vererbung/beispiele/fahrzeug/fahrzeug.good.cpp}}\inputencoding{utf8}
 				Eine Alternative zu Vererbungspolymorphie wäre mehrfache Auswahl (z.B. mit dem switch-Statement). Nachteil dabei
@@ -54,7 +55,7 @@
 				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/universell/vererbung/beispiele/fahrzeug/fahrzeug.bad.cpp}}\inputencoding{utf8}
 				
 			
-			\paragraph*{Beispiel2:}\mbox{}
+			\paragraph*{Beispiel2 -- Snake:}\mbox{}
 			
 					\begin{figure}[H]
 						\includegraphics[width=\textwidth]{polymorphie/universell/vererbung/beispiele/snake/snake.png}
@@ -90,11 +91,11 @@
 					
 					Der Vollständige Code ist auf GitHub zu finden: \url{https://github.com/PaulRaffer/Snake}
 				
-			\paragraph{Kreis-Ellipse-Problem}
+			\paragraph{Kreis-Ellipse-Problem}\mbox{}\\
 				Das Kreis-Ellipse-Problem (bzw. Quadrat-Rechteck-Problem) ist ein Problem in der objektorientierten
 				Programmierung.
 				
-				{\bfseries Problem:}
+				\subparagraph*{Problem:}
 					Für eine Grafiksoftware existiert bereits die (abstrakte) Basisklasse 'Form', welche die Methoden
 					'zeichnen' und 'flaeche' enthält. Einige konkrete Klassen, wie z.B. Dreieck, haben bereits von 'Form'
 					geerbt. Nun sollen auch Klassen für Ellipsen und Kreise geschrieben werden, doch das ist komplizierter
@@ -108,11 +109,8 @@
 					voneinander skalieren kann. Wenn ein skalieren der einen Dimension ein automatisches skalieren der anderen
 					Dimension bewirkt, ist das Liskovsches Substitutionsprinzip nicht erfüllt!
 				
-				{\bfseries Lösungsvorschläge:}
-				
+				\subparagraph*{Lösungsvorschläge:}
 					\begin{itemize}
-						
-						
 						\item Fehler bei Größenänderung:
 							Bereits die Basisklasse 'Ellipse' legt fest, dass die Methoden zum ändern der Größe scheitern
 							können. Dies wird z.B. durch das zurückgeben eines Fehlercodes signalisiert. Der Nachteil
@@ -139,26 +137,32 @@
 							
 						\item Einführen neuer Basisklasse:
 							Man könnte auch eine weitere Klasse einführen, welche in der Vererbungshierarchie zwischen der
-							Basisklasse 'Form' und den beiden konkreten Formen 'Kreis' und 'Ellipse' steht. Der Nachteil
+							Basisklasse 'Form' und den beiden konkreten Formen 'Kreis' und 'Ellipse' steht. Diese Klasse
+							könnte dann den Code enthalten, den die Klassen 'Kreis' und 'Ellipse' gemeinsam haben. Der Nachteil
 							davon ist, dass dadurch die Tiefe der Vererbungshierarchie erhöht werden würde, was den Code
 							unflexibler machen würde.
-						
 					\end{itemize}
 					
 					Keiner der oben genannten Lösungsvorschläge ist ideal. Jeder hat seine Vor- und Nachteile.
 					
 					Daraus folgt, das nicht jede ``ist-ein''-Beziehung durch öffentliche Vererbung dargestellt
-					werden sollte, auch wenn öffentliche Vererbung meistens ``ist-ein'' bedeuten sollte.
+					werden sollte, auch wenn öffentliche Vererbung meistens ``ist-ein'' bedeuten sollte!
 			
-		\subsubsection{Parametrische Polymorphie (TODO)}
-			\paragraph{Einfacher parametrischen Polymorphismus}
+		\subsubsection{Parametrische Polymorphie}
+			Parametrische Polymorphie ist vor allem in der funktionalen Programmierung weit verbreitet. Diese Art der
+			Polymorphie gehört zur statischen Polymorphie, da bereits zur Kompilezeit feststeht, welche Funktion aufgerufen
+			werden wird.
+			TODO
+			\paragraph{Einfacher parametrischen Polymorphismus}\mbox{}\\
 			
-			\paragraph{Beschränkter parametrischen Polymorphismus}
+			\paragraph{Beschränkter parametrischen Polymorphismus}\mbox{}\\
 				Im Gegensatz zum einfachen parametrischen Polymorphismus ist der beschränkte parametrische Polymorphismus
 				typensicher.
 				
-			\paragraph{CRTP (Curiously recurring template pattern)}
-				
+			\paragraph{CRTP}\mbox{}\\
+				Das CRTP (Curiously recurring template pattern) kombiniert parametrische Polymorphie mit Vererbung. Hierbei
+				erbt eine Klasse von einer generischen Klasse, an die die abgeleitete Klasse selbst als Typ-Parameter übergeben
+				wird.
 				
 		
 	\subsection{Ad-hoc-Polymorphie}
@@ -171,15 +175,15 @@
 			zwischen zwei Variablen von eingebauten Typen, zwischen Objekten von selbst definierten Typen oder zwischen
 			einer Variable eines eingebauten Typen und einem Objekt stattfinden. 
 			
-			\paragraph{Coercion von Variablen eingebauter Typen}\mbox{}
+			\paragraph{Coercion von Variablen eingebauter Typen}\mbox{}\\
 			
 				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/coercion/beispiele/src/eingebauteDatentypen.cpp}}\inputencoding{utf8}
 				
 				Ohne Coercion würde diese Zeile einen Fehler verursachen! Diese Art der Coercion ist die einzige Art der
 				Polymorphie die von der Programmiersprache C unterstützt wird!
 			
-			\paragraph{Coercion von Objekten}
-				{\bfseries Konvertierungskonstruktor (C++):}
+			\paragraph{Coercion von Objekten}\mbox{}\\
+				\subparagraph*{Konvertierungskonstruktor (C++):}
 					In C++ ist ein Konvertierungskonstruktor ein nicht expliziter Konstruktor der einen einzigen Parameter
 					akzeptiert. Solch ein Konstruktor wandelt Objekte bzw. Variablen des Parametertyps in Objekte des
 					Klassentyps um. Der Konstruktor darf nicht explizit sein, da sonst nur explizite Typumwandlungen möglich
@@ -188,7 +192,7 @@
 					
 					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/coercion/beispiele/src/konvertierungskonstruktoren.cpp}}\inputencoding{utf8}
 				
-				{\bfseries Konvertierungsoperatoren (C++):}
+				\subparagraph*{Konvertierungsoperatoren (C++):}
 					In C++ werden Konvertierungsoperatoren verwendet, um ein Objekt in ein Objekt oder eine Variable eines
 					anderen Typen umzuwandeln.
 					
@@ -199,12 +203,31 @@
 			Anzahl ihrer Parameter unterscheiden. Funktionen, die das gleiche Verhalten haben, sollten auch den gleichen
 			Namen haben.
 			
-			{\bfseries Beispiel:}
+			\subparagraph*{Beispiel:}
 				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/src/reset.cpp}}\inputencoding{utf8}
 		
-			\paragraph{Operatorüberladung}
+			\paragraph{Operatorüberladung}\mbox{}\\
 				Manche Programmiersprachen (darunter C++) ermöglichen das Überladen von Operatoren für eigene Typen. Die
 				Operatorüberladung ist ein Spezialfall der Funktionsüberladung, da Operatoren auch nichts anderes als
 				Funktionen mit einem oder zwei Parametern sind.
 				
 				Es können beispielsweise die arithmetischen Operatoren für eine eigene Bruchklasse definiert werden.
+				
+		\subsubsection{C++ Template-Spezialisierung}
+			C++ Templates gehören eigentlich zur Kategorie der parametrischen Polymorphie, jedoch kann eine generische Funktion in C++ auch für
+			bestimmte neu implementiert werden implementiert werden. Dies ist auch eine Art der Ad-hoc-Polymorphie.
+			
+	\subsection{Kombination verschiedener Arten der Polymorphie}\mbox{}\\
+		Verschiedene Arten der Polymorphie können meist sehr gut in einem Projekt kombiniert werden.
+		\subsubsection*{Beispiel Bruchklasse:}
+			In meiner Bruchklassen (\url{https://github.com/PaulRaffer/raffer_cpplib-fraction/blob/cpp14/fraction.hpp}) habe ich z.B. die
+			drei wichtigsten Arten der statischen Polymorphie (parametrische Polymorphie, Coercion und Überladung) verwendet.
+			
+			Parametrische Polymorphie wird verwendet, um beliebige Zähler- bzw. Nenner-Typen zuzulassen. So können beispielsweise
+			Doppelbrüche (fraction<fraction<int>, <fraction<int>>) oder Brüche mit komplexen Zahlen als Zähler bzw. Nenner erstellt
+			werden.
+			
+			Des weiteren hat das Klassen-Template einen Konvertierungskonstruktor, der Objekte des Zähler-Typen implizit in Brüche
+			umwandeln kann.
+			
+			Mit Brüchen kann auch gerechnet werden, da die arithmetischen Operatoren überladen wurden.
