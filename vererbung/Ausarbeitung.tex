@@ -12,62 +12,59 @@
 	\end{figure}
 	
 	\subsection{Datenkapselung im Rahmen der Vererbung}
+		Wenn eine Klasse von einer anderen erbt, kann sich die Sichtbarkeit der vererbten Eigenschafen und Methoden ändern.
 		
-		\subsubsection{Änderung der Sichtbarkeit von Eigenschafen und Methoden bei der Vererbung}
-			
-			Wenn eine Klasse von einer anderen erbt, kann sich die Sichtbarkeit der vererbten Eigenschafen und Methoden ändern.
-			
-			\input{vererbung/datenkapselung.tex}
-			
-			Es gibt 3 Arten der Vererbung: die öffentliche, die geschützte und die private Vererbung.
-			
-			Bei der öffentlichen Vererbung bleiben geschützte Eigenschafen und Methoden der Basisklasse auch in der
-			abgeleiteten Klasse geschützt. Öffentliche Eigenschafen und Methoden bleiben öffentlich. Öffentliche Vererbung
-			sollte immer eine ``ist-ein''-Beziehung darstellen. Jedoch sollte nicht jede ``ist-ein''-Beziehung durch Vererbung
-			dargestellt werden (siehe 3.1.2.2 Kreis-Ellipse-Problem). Diese Art der Vererbung wir am häufigsten verwendet.
-			
-			Bei der geschützten Vererbung sind alle öffenlichen und geschützten Eigenschafen und Methoden der Basisklasse in
-			der abgeleiteten Klasse geschützt. Geschützte Vererbung sollte immer eine ``ist implementiert mit''-Beziehung darstellen
-			
-			Bei der privaten Vererbung sind alle öffentlichen und privaten Eigenschafen und Methoden der Basisklasse in der
-			abgeleiteten Klasse privat.
-			Private Vererbung solle wie geschützte Vererbung immer eine ``ist implementiert mit''-Beziehung darstellen.
-			Eine gute Alternative zur geschützten und privaten Vererbung bietet das Layering (auch Komposition genannt). Beim
-			Layering wird statt von einer Klasse zu erben, eine Eigenschaft
-			der Klasse hinzugefügt. Layering stellt eine ``hat-ein''- und somit auch eine ``ist-implementiert-mit''-Beziehung dar.
-			
-			Private Eingenschafen und Methoden der Basisklasse werden nicht in die abgeleitete Klasse vererbt.
-			
-			\paragraph*{Beispiel:}
-				Eine C++ Klasse Point2d, deren Objekte Punkte auf einer Ebene darstellen, existiert bereits.
-				\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point2d.hpp}}\inputencoding{utf8}
-				Nun sollen auch Punkte im Raum erstellt werden können. Dafür wird die Klasse Point3d geschrieben, welche
-				unterschiedlich programmiert werden kann.
-			
-			\subparagraph*{Lösung ohne Vererbung:}
-			Natürlich könnte die Klasse von Grund auf neu geschrieben werden.
-			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.no.hpp}}\inputencoding{utf8}
-			Diese Lösung ist nicht optimal, da die Eingenschaften x und y aus der Klasse Point2d nicht wiederverwendet werden.
-			
-			\subparagraph*{Lösung mit öffentlicher Vererbung:}
-			Mit öffentlicher Vererbung können die Eigenschaften 'x' und 'y' aus der Klasse 'Point2d' für die Klasse 'Point3d'
-			wiederverwendet werden.
-			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.public.hpp}}\inputencoding{utf8}
-			Obwohl hier öffenliche Vererbung verwendet wurde, ist es wahrscheinlich nicht sinnvoll diese Klassen vielgestaltig
-			zu verwenden, da die Aussage ``Ein Punkt im Raum (Point3d) ist ein Punkt auf einer Ebene (Point2d).'' nicht stimmt.
-			
-			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point.use.cpp}}\inputencoding{utf8}
-			Diese Zeile würde zwar vom Compiler übersetzt werden, macht aber wenig Sinn. Leider gibt es keine Möglichkeit eine
-			solche Verwendung zu verhindern. Deshalb ist auch die Lösung mit öffentlicher Vererbung nicht optimal.
-			
-			\subparagraph*{Lösung mit privater Vererbung:}
-			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.private.hpp}}\inputencoding{utf8}
-			Wenn man von der Klasse 'Point2d' privat erbt, hat man keines der Probleme der anderen beiden Lösungen,
-			allerdings muss man die Eigenschaften 'x' und 'y' in der abgeleiteten Klasse wieder öffentlich machen, da diese bei
-			der privaten Vererbung privat werden. In diesem Fall hat diese Lösung keinen Vorteil im Vergleich zur ersten, da
-			der Code sogar länger ist. Wenn aber 'x' und 'y' Methoden statt Eigenschaften sind, lohnt es sich sehr wohl private
-			Vererbung zu verwenden, da diese dann nicht doppelt implementiert werden müssen.
-			
+		\input{vererbung/datenkapselung.tex}
+		
+		Es gibt 3 Arten der Vererbung: die öffentliche, die geschützte und die private Vererbung.
+		\\\\
+		Bei der öffentlichen Vererbung bleiben geschützte Eigenschafen und Methoden der Basisklasse auch in der
+		abgeleiteten Klasse geschützt. Öffentliche Eigenschafen und Methoden bleiben öffentlich. Öffentliche Vererbung
+		sollte immer eine ``ist-ein''-Beziehung darstellen. Jedoch sollte nicht jede ``ist-ein''-Beziehung durch Vererbung
+		dargestellt werden (siehe 3.1.2.2 Kreis-Ellipse-Problem). Diese Art der Vererbung wir am häufigsten verwendet.
+		\\\\
+		Bei der geschützten Vererbung sind alle öffenlichen und geschützten Eigenschafen und Methoden der Basisklasse in
+		der abgeleiteten Klasse geschützt. Geschützte Vererbung sollte immer eine ``ist implementiert mit''-Beziehung darstellen
+		\\\\
+		Bei der privaten Vererbung sind alle öffentlichen und privaten Eigenschafen und Methoden der Basisklasse in der
+		abgeleiteten Klasse privat.
+		Private Vererbung solle wie geschützte Vererbung immer eine ``ist implementiert mit''-Beziehung darstellen.
+		Eine gute Alternative zur geschützten und privaten Vererbung bietet das Layering (auch Komposition genannt). Beim
+		Layering wird statt von einer Klasse zu erben, eine Eigenschaft
+		der Klasse hinzugefügt. Layering stellt eine ``hat-ein''- und somit auch eine ``ist-implementiert-mit''-Beziehung dar.
+		Layering sollte wenn möglich gegenüber geschützter oder privater Vererbung bevorzugt werden.
+		\\\\
+		Private Eingenschafen und Methoden der Basisklasse werden nie in die abgeleitete Klasse vererbt.
+		
+		\paragraph*{Beispiel:}\mbox{}\\
+			Eine C++ Klasse Point2d, deren Objekte Punkte auf einer Ebene darstellen, existiert bereits.
+			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point2d.hpp}}\inputencoding{utf8}
+			Nun sollen auch Punkte im Raum erstellt werden können. Dafür wird die Klasse Point3d geschrieben, welche
+			unterschiedlich programmiert werden kann.
+		
+		\subparagraph*{Lösung ohne Vererbung:}\mbox{}\\
+		Natürlich könnte die Klasse von Grund auf neu geschrieben werden.
+		\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.no.hpp}}\inputencoding{utf8}
+		Diese Lösung ist nicht optimal, da die Eingenschaften x und y aus der Klasse Point2d nicht wiederverwendet werden.
+		
+		\subparagraph*{Lösung mit öffentlicher Vererbung:}\mbox{}\\
+		Mit öffentlicher Vererbung können die Eigenschaften 'x' und 'y' aus der Klasse 'Point2d' für die Klasse 'Point3d'
+		wiederverwendet werden.
+		\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.public.hpp}}\inputencoding{utf8}
+		Obwohl hier öffenliche Vererbung verwendet wurde, ist es wahrscheinlich nicht sinnvoll diese Klassen vielgestaltig
+		zu verwenden, da die Aussage ``Ein Punkt im Raum (Point3d) ist ein Punkt auf einer Ebene (Point2d).'' nicht stimmt.
+		
+		\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point.use.cpp}}\inputencoding{utf8}
+		Diese Zeile würde zwar vom Compiler übersetzt werden, macht aber wenig Sinn. Leider gibt es keine Möglichkeit eine
+		solche Verwendung zu verhindern. Deshalb ist auch die Lösung mit öffentlicher Vererbung nicht optimal.
+		
+		\subparagraph*{Lösung mit privater Vererbung:}\mbox{}\\
+		\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.private.hpp}}\inputencoding{utf8}
+		Wenn man von der Klasse 'Point2d' privat erbt, hat man keines der Probleme der anderen beiden Lösungen,
+		allerdings muss man die Eigenschaften 'x' und 'y' in der abgeleiteten Klasse wieder öffentlich machen, da diese bei
+		der privaten Vererbung privat werden. In diesem Fall hat diese Lösung keinen Vorteil im Vergleich zur ersten, da
+		der Code sogar länger ist. Wenn aber 'x' und 'y' Methoden statt Eigenschaften sind, lohnt es sich sehr wohl private
+		Vererbung zu verwenden, da diese dann nicht doppelt implementiert werden müssen.
 	
 	\subsection{Schnittstellenvererbung}
 		Bei der Schnittstellenvererbung wird nur die Signatur, aber keine Standardimplementierung, einer Methode der
@@ -93,23 +90,25 @@
 		\end{figure}
 		
 		\subsubsection{Diamond-Problem}
-			Das Diamond-Problem ist eines der Probleme, zu denen Mehrfachvererbung führen kann. Dieses tritt auf,
-			wenn eine abgeleitete Klasse C über mehr als einen Pfad von derselben Basisklasse A erbt. Dies ist
-			problematisch, da die Eigenschaften und Methoden aus Klasse C mehrfach an Klasse A vererbt werden,
-			und deshalb in der abgeleiteten Klasse A öfter existieren.
+			Das Diamond-Problem ist eines der Probleme, zu denen Mehrfachvererbung führen kann. Dieses tritt auf, wenn eine
+			abgeleitete Klasse C über mehr als einen Pfad von derselben Basisklasse A erbt. Dies ist problematisch, da die
+			Eigenschaften und Methoden aus Klasse A mehrfach an Klasse C vererbt werden, und deshalb in der abgeleiteten Klasse
+			A öfter existieren.
 			\begin{figure}[H]
 				\includegraphics[scale=0.75]{vererbung/mehrfach/diamond/nicht_virtuell.png}
 			\end{figure}
 			
-			\paragraph{C++-Lösung: Virtuelle Vererbung}\mbox{}\\
-				In C++ kann das Problem mithilfe virtueller Vererbung gelöst werden. Hierbei wird von allen Klassen, die über
+			In Java kann das Diamond-Problem nicht auftreten, da es keine Mehrfachimplementierungsvererbung gibt.
+			
+			\paragraph{Virtuelle Vererbung}\mbox{}\\
+				In C++ kann das  Diamond-Problem mithilfe virtueller Vererbung gelöst werden. Hierbei wird von allen Klassen, die über
 				mehrere Pfade von einer abgeleiteten Klasse beerbt werden, virtuell geerbt. Somit teilen sich dessen
 				abgeleitete Klassen eine gemeinsame Instanz von dieser Klasse.
 				\begin{figure}[H]
 					\includegraphics[scale=0.75]{vererbung/mehrfach/diamond/virtuell.png}
 				\end{figure}
 				
-				\subparagraph*{Beispiel:}
+				\subparagraph*{Beispiel:}\mbox{}\\
 					Es könnte z.B. eine Klasse 'Person' geben, von der die Klassen 'Schueler' und 'Lehrer' erben. Die Klasse
 					'Lehrer' fügt die Methode 'unterrichten' hinzu und die Klasse 'Schueler' die Methode 'lernen'. Es gibt aber
 					auch Schüler, die anderen Schülern Nachhilfe geben. Solche Schüler sind also Schüler und Lehrer zugleich.
@@ -118,29 +117,31 @@
 					\begin{figure}[H]
 						\includegraphics[scale=0.75]{vererbung/mehrfach/diamond/beispiele/schueler_lehrer/schueler_lehrer.png}
 					\end{figure}
-					
-			\paragraph{Java-Lösung}\mbox{}\\
-				In Java kann das Diamond-Problem nicht auftreten, da es keine Mehrfachimplementierungsvererbung gibt.
+				
+			
 			
 	\subsection{Abstrakte Klassen}
-		Eine abstrakte Klasse ist eine Klasse, von der keine Objekte erzeugt werden können. Das ist natürlich nur Sinnvoll,
+		Eine abstrakte Klasse ist eine Klasse, von der keine Objekte erzeugt werden können. Das ist natürlich nur sinnvoll,
 		wenn von so einer Klasse geerbt wird, damit von einer Unterklasse ein Objekt erzeugt werden kann. In Java werden
 		abstrakte Klassen mit dem abstract-Schlüsselwort gekennzeichnet. In C++ ist eine Klasse, die eine rein virtuelle
 		Methode (virtual method() = 0) enthält, automatisch abstrakt.
 		
-		\subparagraph*{Java:}
+		\subparagraph*{Java:}\mbox{}\\
 			\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt.java}}\inputencoding{utf8}
 		
-		\subparagraph*{C++:}
-			\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt.hpp}}\inputencoding{utf8}
+		\subparagraph*{C++:}\mbox{}\\
+			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/abstrakt/abstrakt.hpp}}\inputencoding{utf8}
 			
 			Folgender Code wäre nicht zulässig, da kein Objekt einer abstrakten Klasse erzeugt werden darf.
-			\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt.use.cpp}}\inputencoding{utf8}
+			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/abstrakt/abstrakt.use.cpp}}\inputencoding{utf8}
 			
 			Es muss zuerst von der abstrakten Klasse geerbt werden, um von abgeleiteten Klassen Objekte zu erzeugen. Die rein
 			virtuelle Methode muss von der abgeleiteten Klasse implementiert werden, sonst ist auch die abgeleitete Klasse
 			abstrakt.
-			\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt_child.use.cpp}}\inputencoding{utf8}
+			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/abstrakt/abgeleitete_klasse.hpp}}\inputencoding{utf8}
+			
+			Nun kann ohne Probleme ein Objekt der abgeleiteten Klasse erzeugt werden.
+			\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/abstrakt/abgeleitete_klasse.use.cpp}}\inputencoding{utf8}
 	
 	\subsection{Endgültige Klassen}
 		Endgültige Klassen sind Klassen, von denen nicht geerbt werden kann.

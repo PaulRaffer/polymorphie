@@ -1,12 +1,13 @@
 \begin{table}[H]
-	\begin{tabularx}{\textwidth}{$X|^X|^X|^X}
+	\begin{tabularx}{\textwidth}{$l|^X|^X|^X}
 		\multicolumn{4}{l}{\bfseries Sichtbarkeit in ...} \\
 		\hline
 		\bfseries Basisklasse    & \multicolumn{3}{l}{\bfseries abgeleiteter Klasse (erbt ... von Basisklasse)} \\
-		\rowstyle{\bfseries}     & öffentlich    & geschützt     & privat        \\
+		\rowstyle{\bfseries}     & öffentlich    & geschützt                   & privat                      \\
+		                         & (``ist-ein'') & (``ist-implementiert-mit'') & (``ist-implementiert-mit'') \\
 		\hline
-		öffentlich $\rightarrow$ & öffentlich    & geschützt     & privat        \\
-		geschützt  $\rightarrow$ & geschützt     & geschützt     & privat        \\
-		privat     $\rightarrow$ & nicht vererbt & nicht vererbt & nicht vererbt \\
+		öffentlich $\rightarrow$ & öffentlich    & geschützt                   & privat                      \\
+		geschützt  $\rightarrow$ & geschützt     & geschützt                   & privat                      \\
+		privat     $\rightarrow$ & nicht vererbt & nicht vererbt               & nicht vererbt               \\
 	\end{tabularx}
 \end{table}
