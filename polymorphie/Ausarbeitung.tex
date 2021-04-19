@@ -42,17 +42,32 @@
 			
 			\paragraph{Virtuelle Methoden}\mbox{}\\
 				Eine virtuelle Methode, ist eine Methode bei der zur Kompilezeit noch nicht feststeht, welcher Code ausgeführt
-				wird, wenn sie aufgerufen wird.
+				wird, wenn sie aufgerufen wird. In Java sind alle Methoden virtuell. In C++ müssen virtuelle Methoden mit dem
+				Schlüsselwort 'virtual' gekennzeichnet werden. Nur virtuelle Methoden können in Unterklassen überschrieben
+				werden. Jede Klasse hat eine Funktionstabelle (vtable), in der die Adressen der Methoden stehen, die für Objekte der
+				Klasse aufgerufen werden sollen.
+				
+				\subparagraph{Abstrakte Methoden}\mbox{}\\
+					TODO
+				
+				\subparagraph{Rein virtuelle Methoden}\mbox{}\\
+					TODO
+					
+				\subparagraph{Virtuelle Destruktoren (C++)}\mbox{}\\
+					TODO
 			
 			\paragraph*{Beispiel -- Fahrzeuge:}\mbox{}\\
-				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/universell/vererbung/beispiele/fahrzeug/fahrzeug.good.cpp}}\inputencoding{utf8}
-				Eine Alternative zu Vererbungspolymorphie wäre mehrfache Auswahl (z.B. mit dem switch-Statement). Nachteil dabei
-				ist, das der Code für ein Objekt nicht gesammelt an einem Platz ist, sondern über das ganze Programm verteilt.
-				So müsste man immer den ganzen Code durchsuchen, wenn man z.B. einen Fahrzeugtypen hinzufügen möchte. Wenn man
-				allerdings Vererbungspolymorphie verwendet, muss man lediglich eine weiter Unterklasse schreiben.
-				
+				Es gibt Fahrzeuge von verschiedenen Typen (Auto, Fahrrad, ...). Nicht alle Fahrzeuge biegen auf die gleiche Art
+				ab oder beschleunigen gleich. Deshalb muss z.B. der Code zum links abbiegen für jedes Fahrzeug geschrieben
+				werden. Dies könnte z.B. mit mehrfacher Auswahl (z.B. mit dem switch-Statement) gemacht werden.
 				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/universell/vererbung/beispiele/fahrzeug/fahrzeug.bad.cpp}}\inputencoding{utf8}
+				Nachteil hierbei ist, das der Code für ein Objekt nicht gesammelt an einem Ort ist, sondern über das ganze Programm verteilt.
+				Denn ein Fahrzeug kann ja nicht nur links abbiegen, sondern auch rechts abbiegen, beschleunigen oder bremsen. 
+				So muss man immer den ganzen Code durchsuchen, wenn man z.B. einen Fahrzeugtypen hinzufügen möchte.
 				
+				Eine gute Alternative zu mehrfache Auswahl bietet die Vererbungspolymorphie.
+				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/universell/vererbung/beispiele/fahrzeug/fahrzeug.good.cpp}}\inputencoding{utf8}
+				Nun muss man lediglich eine weitere Unterklasse schreiben, um einen Fahrzeugtyp hinzuzufügen.
 			
 			\paragraph*{Beispiel -- Snake:}\mbox{}\\
 				\begin{figure}[H]
@@ -172,10 +187,13 @@
 		\subsubsection{Parametrische Polymorphie}
 			Parametrische Polymorphie ist vor allem in der funktionalen Programmierung weit verbreitet. Diese Art der
 			Polymorphie gehört zur statischen Polymorphie, da bereits zur Kompilezeit feststeht, welche Funktion aufgerufen
-			werden wird.
+			werden wird. Parametrische Polymorphie ermöglicht er, einen Algorithmus bzw. Typ allgemein zu programmieren, um ihn
+			in möglichst vielen verschiedenen Situationen verwenden zu können. In C++ kann parametrische Polymorphie durch
+			Templates ausgedrückt werden,in Java durch Generics.
 			TODO
 			\paragraph{Einfacher parametrischen Polymorphismus}\mbox{}\\
-			
+				TODO
+				
 			\paragraph{Beschränkter parametrischen Polymorphismus}\mbox{}\\
 				Im Gegensatz zum einfachen parametrischen Polymorphismus ist der beschränkte parametrische Polymorphismus
 				typensicher.
@@ -198,16 +216,21 @@
 					welcher diese darstellt. Die Position des Armbands wird auf einer Karte und zusätzlich in einer Liste
 					(falls mehrere Armbänder registriert sind) angezeigt. Natürlich müssen beide Ansichten regelmäßig
 					aktualisiert werden, da sich die Position oder der Status des Armbandes ändern können. Dazu wurde eine
-					generische Basisklasse (UpdateView) geschrieben, welche die Logik zum aktualisieren der Daten enthält. Jede
+					generische Basisklasse (\lstinline|UpdateView|) geschrieben, welche die Logik zum aktualisieren der Daten enthält. Jede
 					zweite Sekunde wird die Ansicht in einem Hintergrundthread aktualisiert. Dies geschieht durch das Aufrufen
-					der Funktion 'updateFunction'. Die Funktion wird von der Unterklasse als Lambda an eine Setter-Funktion
-					höherer Ordnung (setUpdateFunction) übergeben. Da es in Java keine freien Funktionen gibt muss ein
-					Interface (UpdateFunction) mit einer einzigen Methode (update) erstellt werden.
+					der Funktion \lstinline|updateFunction|. Die Funktion wird von der Unterklasse als Lambda an eine Setter-Funktion
+					höherer Ordnung \lstinline|setUpdateFunction| übergeben. Da es in Java keine freien Funktionen gibt muss ein
+					Interface \lstinline|UpdateFunction| mit einer einzigen Methode \lstinline|update| erstellt werden.
 					
 					\UseRawInputEncoding{\lstinputlisting[language={Java}]{polymorphie/universell/parametrisch/crtp/beispiele/diplomarbeit/src/UpdateView.java}}\inputencoding{utf8}
 					
 					Um eine Ansicht zu erstellen, die automatisch mit neuen Daten aktualisiert wird, muss von der Klasse
-					'UpdateView' geerbt werden. Dabei wird das CRTP angewandt. Daraus folgt, dass ein Objekt der Klasse MyView, wobei MyView von UpdateView<MyView> aberbt, auch ein Objekt des Typen UpdateView<MyView> sein muss. Umgekehrt ist dies streng genommen eigentlich nicht der Fall, da aber das CRTP verwendet wird und die Funktion, welche die Ansicht aktualisiert in MyView definiert wird und deshalb alle Eigenschafen und Methoden der Unterklasse (MyView selbst) kennt, ist auch eine Typumwandlung von UpdateView nach MyView problemlos (abgesehen von ein paar Warnungen) möglich.
+					'UpdateView' geerbt werden. Dabei wird das CRTP angewandt. Daraus folgt, dass ein Objekt der Klasse
+					MyView, wobei MyView von \lstinline|UpdateView<MyView>| erbt, auch ein Objekt des Typen \lstinline|UpdateView<MyView>| sein
+					muss. Umgekehrt ist dies streng genommen eigentlich nicht der Fall, da aber das CRTP verwendet wird und die
+					Funktion, welche die Ansicht aktualisiert in MyView definiert wird und deshalb alle Eigenschafen und
+					Methoden der Unterklasse (\lstinline|MyView| selbst) kennt, ist auch eine Typumwandlung von \lstinline|UpdateView| nach \lstinline|MyView|
+					problemlos (abgesehen von ein paar Warnungen) möglich.
 					
 					\UseRawInputEncoding{\lstinputlisting[language={Java}]{polymorphie/universell/parametrisch/crtp/beispiele/diplomarbeit/src/MapView.java}}\inputencoding{utf8}
 					
@@ -217,6 +240,35 @@
 		Mit Ad-hoc-Polymorphie kann die gleiche Schnittstelle, im Gegensatz zu universellen Polymorphie, nur für eine
 		begrenzte Anzahl an bestimmten Typen bereitgestellt werden. Für jeden Typ gibt es eine eigene Implementierung
 	
+		\subsubsection{Überladung}
+			Bei der Funktionsüberladung können verschiedene Funktionen gleich heißen und sich nur durch die Typen oder die
+			Anzahl ihrer Parameter unterscheiden. Funktionen, die das gleiche Verhalten haben, sollten auch den gleichen
+			Namen haben.
+			
+			\paragraph*{Beispiel -- Ausgabe:}\mbox{}\\
+				Es sollen zwei Funktionen zur Ausgabe von einem C-String (\lstinline|char[]|) bzw. einer ganzen Zahl
+				(\lstinline|int|) geschrieben werden. Da die Funktionen beide das gleiche tun, sollten sie auch den gleichen
+				Namen haben.
+				
+				\paragraph*{C-Lösung:}\mbox{}\\
+					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/print/print.c}}\inputencoding{utf8}
+					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/print/print.use.c}}\inputencoding{utf8}
+				
+				\paragraph*{C++-Lösung:}\mbox{}\\
+					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/print/print.cpp}}\inputencoding{utf8}
+					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/print/print.use.cpp}}\inputencoding{utf8}
+			
+			\paragraph*{Beispiel -- Reset:}\mbox{}\\
+				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/reset/reset.cpp}}\inputencoding{utf8}
+		
+			\paragraph{Operatorüberladung}\mbox{}\\
+				Manche Programmiersprachen (darunter C++) ermöglichen das Überladen von Operatoren für eigene Typen. Die
+				Operatorüberladung ist ein Spezialfall der Funktionsüberladung, da Operatoren auch nichts anderes als
+				Funktionen mit einem oder zwei Parametern sind.
+				
+				Es können beispielsweise die arithmetischen Operatoren für eine eigene Bruchklasse definiert werden.
+		
+		
 		\subsubsection{Coercion}
 			Coercion ist eine implizite Typumwandlung vom Compiler. Diese Art der Polymorphie ist statisch, da schon zur
 			Kompilezeit feststeht, welche Funktion bzw. Methode aufgerufen wird. Implizite Typumwandlungen können entweder
@@ -244,37 +296,10 @@
 					
 					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/coercion/beispiele/src/konvertierungsoperatoren.cpp}}\inputencoding{utf8}
 		
-		\subsubsection{Überladung}
-			Bei der Funktionsüberladung können verschiedene Funktionen gleich heißen und sich nur durch die Typen oder die
-			Anzahl ihrer Parameter unterscheiden. Funktionen, die das gleiche Verhalten haben, sollten auch den gleichen
-			Namen haben.
-			
-			\paragraph*{Beispiel -- Ausgabe:}
-				Es sollen zwei Funktionen zur Ausgabe von einem C-String (\lstinline|char[]|) bzw. einer ganzen Zahl
-				(\lstinline|int|) geschrieben werden. Da die Funktionen beide das gleiche tun, sollten sie auch den gleichen
-				Namen haben.
-				
-				\paragraph*{C-Lösung:}
-					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/print/print.c}}\inputencoding{utf8}
-					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/print/print.use.c}}\inputencoding{utf8}
-				
-				\paragraph*{C++-Lösung:}
-					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/print/print.cpp}}\inputencoding{utf8}
-					\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/print/print.use.cpp}}\inputencoding{utf8}
-			
-			\paragraph*{Beispiel -- Reset:}\mbox{}\\
-				\UseRawInputEncoding{\lstinputlisting[language={C++}]{polymorphie/adhoc/ueberladung/beispiele/reset/reset.cpp}}\inputencoding{utf8}
 		
-			\paragraph{Operatorüberladung}\mbox{}\\
-				Manche Programmiersprachen (darunter C++) ermöglichen das Überladen von Operatoren für eigene Typen. Die
-				Operatorüberladung ist ein Spezialfall der Funktionsüberladung, da Operatoren auch nichts anderes als
-				Funktionen mit einem oder zwei Parametern sind.
-				
-				Es können beispielsweise die arithmetischen Operatoren für eine eigene Bruchklasse definiert werden.
-				
 		\subsubsection{C++ Template-Spezialisierung}
 			C++ Templates gehören eigentlich zur Kategorie der parametrischen Polymorphie, jedoch kann eine generische Funktion in C++ auch für
-			bestimmte neu implementiert werden implementiert werden. Dies ist auch eine Art der Ad-hoc-Polymorphie.
+			bestimmte Typen neu implementiert werden implementiert werden. Dies ist auch eine Art der Ad-hoc-Polymorphie.
 			
 	\subsection{Kombination verschiedener Arten der Polymorphie}\mbox{}\\
 		Verschiedene Arten der Polymorphie können meist sehr gut in einem Projekt kombiniert werden.

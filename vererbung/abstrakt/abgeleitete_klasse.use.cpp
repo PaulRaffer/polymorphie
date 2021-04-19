@@ -1,1 +1,2 @@
-Abstrakte_klasse* = new Abgeleitete_klasse{}; // Funktioniert! :)
+Abstrakte_klasse* obj = new Abgeleitete_klasse{}; // Funktioniert! :)
+

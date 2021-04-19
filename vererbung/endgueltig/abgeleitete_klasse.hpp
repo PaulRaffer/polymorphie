@@ -1,0 +1,3 @@
+class Abgeleitete_klasse : public Endgueltige_klasse { // Error! :)
+	//...
+};

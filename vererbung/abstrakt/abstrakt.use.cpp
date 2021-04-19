@@ -1,1 +1,1 @@
-Abstrakte_klasse* = new Abstrakte_klasse{}; // Error! :)
+Abstrakte_klasse* obj = new Abstrakte_klasse{}; // Error! :)

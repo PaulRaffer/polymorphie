@@ -1,5 +1,6 @@
 \section{Vererbung}
 
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Quelle: \url{https://de.wikipedia.org/wiki/Vererbung_(Programmierung)}}}
 \begin{frame}
 	\frametitle{Vererbung}
 	\begin{itemize}
@@ -12,20 +13,21 @@
 		\includegraphics[scale=0.75]{vererbung/uml.png}
 	\end{figure}
 \end{frame}
+}
 
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Quelle: \url{https://de.wikipedia.org/wiki/Vererbung_(Programmierung)\#Datenkapselung_im_Rahmen_der_Vererbung}}}
 \begin{frame}
 	\frametitle{Datenkapselung im Rahmen der Vererbung}
 	\begin{figure}[h]
 		\input{vererbung/datenkapselung.tex}
 	\end{figure}
 	\begin{itemize}
-		\item öffentlich: ``ist-ein''-Beziehung
-		\item geschützt: ``ist-implementiert-mit''-Beziehung
-		\item privat: ``ist-implemtniert-mit''-Beziehung
 		\item Layering: ``hat-ein''-/''ist-implementiert-mit''-Beziehung
 	\end{itemize}
 \end{frame}
+}
 
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Vollständiger Code: \url{https://godbolt.org/z/neqhe7GsG}}}
 \begin{frame}
 	\frametitle{Beispiel:}
 	{\tiny\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point2d.hpp}}\inputencoding{utf8}}
@@ -41,8 +43,10 @@
 	{\bfseries Lösung mit privater Vererbung:}
 	{\tiny\UseRawInputEncoding{\lstinputlisting[language={C++}]{vererbung/beispiele/point/src/point3d.private.hpp}}\inputencoding{utf8}}
 \end{frame}
+}
 
 
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Quelle: \url{https://de.wikipedia.org/wiki/Vererbung_(Programmierung)\#Schnittstellenvererbung}}}
 \begin{frame}
 	\frametitle{Schnittstellenvererbung}
 	\begin{itemize}
@@ -51,8 +55,9 @@
 		\item C++: abstrakte Klasse, die nur rein virtuelle Methoden enthält
 	\end{itemize}
 \end{frame}
+}
 
-
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Quelle: \url{https://de.wikipedia.org/wiki/Vererbung_(Programmierung)\#Implementierungsvererbung}}}
 \begin{frame}
 	\frametitle{Implementierungsvererbung}
 	\begin{itemize}
@@ -60,8 +65,10 @@
 		\item Standardimplementierung kann aber von abgeleiteter Klasse überschrieben werden
 	\end{itemize}
 \end{frame}
+}
 
 
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Quelle: \url{https://en.wikipedia.org/wiki/Multiple_inheritance}}}
 \begin{frame}
 	\frametitle{Mehrfachvererbung}
 	\begin{itemize}
@@ -73,8 +80,9 @@
 		\includegraphics[scale=0.75]{vererbung/mehrfach/mehrfach.png}
 	\end{figure}
 \end{frame}
+}
 
-
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Quelle: \url{https://de.wikipedia.org/wiki/Diamond-Problem}}}
 \begin{frame}
 	\frametitle{Diamond-Problem}
 	\begin{itemize}
@@ -84,12 +92,12 @@
 	\begin{figure}[H]
 		\includegraphics[scale=0.75]{vererbung/mehrfach/diamond/nicht_virtuell.png}
 	\end{figure}
-	
 \end{frame}
+}
 
-
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Quelle: \url{https://de.wikipedia.org/wiki/Diamond-Problem\#Modellierung_in_C++}}}
 \begin{frame}
-	\frametitle{C++-Lösung: Virtuelle Vererbung}
+	\frametitle{Virtuelle Vererbung (C++)}
 	\begin{itemize}
 		\item B1 und B2 erben von A virtuell
 		\item abgeleitete Klassen teilen sich eine gemeinsame Instanz
@@ -98,12 +106,12 @@
 		\includegraphics[scale=0.75]{vererbung/mehrfach/diamond/virtuell.png}
 	\end{figure}
 \end{frame}
-
+}
 
 \begin{frame}
-	\frametitle{Beispiel: Schüler/Lehrer}
+	\frametitle{Beispiel -- Schüler/Lehrer}
 	\begin{itemize}
-		\item Schueler und Lehrer erben von Person
+		\item Schüler und Lehrer erben von Person
 		\item Es gibt auch Schüler, die anderen Schülern Nachhilfe geben
 	\end{itemize}
 	\begin{figure}[H]
@@ -112,28 +120,35 @@
 \end{frame}
 
 
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Vollständiges Beispiel: \url{https://godbolt.org/z/5Kqe1cG93}}}
 \begin{frame}
 	\frametitle{Abstrakte Klassen}
 	\begin{itemize}
 		\item Von abstrakten Klassen können keine Objekte erzeugt werden
-		\item Es wird von solchen Klassen nur geerbt und von der abgeleiteten Klasse ein Objekt erzeugt.
+		\item Es wird geerbt und von der abgeleiteten Klasse ein Objekt erzeugt
 	\end{itemize}
-	\pause
-	{\tiny\bfseries Java:}
+	
+	{\scriptsize\bfseries Java:}
 		{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt.java}}\inputencoding{utf8}}
 	
-	{\tiny\bfseries C++:}
+	{\scriptsize\bfseries C++:}
 		{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt.hpp}}\inputencoding{utf8}}
 		
 		\pause{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt.use.cpp}}\inputencoding{utf8}}
 		
-		\pause{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abstrakt_child.use.cpp}}\inputencoding{utf8}}
+		\pause{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abgeleitete_klasse.hpp}}\inputencoding{utf8}}
+		{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/abstrakt/abgeleitete_klasse.use.cpp}}\inputencoding{utf8}}
 \end{frame}
+}
 
-
+{\setbeamertemplate{footline}{\parbox{\linewidth}{\vspace*{-8pt}Vollständiges Beispiel: \url{https://godbolt.org/z/fnbKh1Pr9}}}
 \begin{frame}
-	\frametitle{Entgültige Klassen}
+	\frametitle{Endgültige Klassen}
 	\begin{itemize}
 		\item Kann keine Basisklasse sein
 	\end{itemize}
+	
+	{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/endgueltig/endgueltig.hpp}}\inputencoding{utf8}}
+	{\tiny\UseRawInputEncoding{\lstinputlisting[language={Java}]{vererbung/endgueltig/abgeleitete_klasse.hpp}}\inputencoding{utf8}}
 \end{frame}
+}

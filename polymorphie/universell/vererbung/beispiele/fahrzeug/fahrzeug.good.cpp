@@ -4,20 +4,20 @@ class Fahrzeug {
 	// ...
 };
 
-class Auto {
+class Auto : public Fahrzeug {
 	// ...
-	public: virtual void rechts_abbiegen()
+	public: virtual void rechts_abbiegen() override
 	{
-		// Implementierung fuer Autos
+		// <Implementierung fuer Autos>
 	}
 	// ...
-}
+};
 
-class Fahrrad {
+class Fahrrad : public Fahrzeug {
 	// ...
-	public: virtual void rechts_abbiegen()
+	public: virtual void rechts_abbiegen() override
 	{
-		// Implementierung fuer Fahrraeder
+		// <Implementierung fuer Fahrraeder>
 	}
 	// ...
 };
@@ -25,5 +25,5 @@ class Fahrrad {
 auto main() -> int
 {
 	Fahrzeug* fahrzeug = new Auto;
-	fahrzeug.rechts_abbiegen();
+	fahrzeug->rechts_abbiegen();
 }

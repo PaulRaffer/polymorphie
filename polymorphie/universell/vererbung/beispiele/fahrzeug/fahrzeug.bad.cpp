@@ -12,10 +12,10 @@ void rechts_abbiegen(Fahrzeug* fahrzeug)
 {
 	switch (fahrzeug->typ) {
 		case Auto:
-			// Implementierung fuer Autos
+			// <Implementierung fuer Autos>
 			break;
 		case Fahrrad:
-			// Implementierung fuer Fahrraeder
+			// <Implementierung fuer Fahrraeder>
 			break;
 		default:
 			// Fehler: Ungueltiger Typ!
